@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BNEF — Les avantages sociaux, enfin clairs.</title>
+<meta name="description" content="BNEF aide les employeurs à offrir de meilleurs avantages sociaux — et leurs employés à vraiment les comprendre.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ─── Reset ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+img { max-width: 100%; display: block; }
+
+/* ─── Tokens ─────────────────────────────────────────── */
+:root {
+  --nuit:    #08081a;
+  --bleu:    #0f1f6a;
+  --corail:  #E8735A;
+  --creme:   #f4f2ee;
+  --blanc:   #ffffff;
+  --texte:   #1a1a2e;
+  --muted:   #888580;
+  --border:  #e8e4de;
+  --font-titre: 'Syne', sans-serif;
+  --font-body:  'DM Sans', sans-serif;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --radius-pill: 100px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--blanc);
+  color: var(--texte);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── Animations ─────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(var(--r, 0deg)); }
+  50%       { transform: translateY(-18px) rotate(var(--r, 0deg)); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.anim-1 { animation: fadeUp 0.7s ease both; }
+.anim-2 { animation: fadeUp 0.7s 0.12s ease both; }
+.anim-3 { animation: fadeUp 0.7s 0.24s ease both; }
+.anim-4 { animation: fadeUp 0.7s 0.36s ease both; }
+.anim-5 { animation: fadeUp 0.7s 0.48s ease both; }
+
+/* ─── Nav ─────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 2.5rem;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.nav.scrolled {
+  background: rgba(8,8,26,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+}
+.nav-logo {
+  font-family: var(--font-titre);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--blanc);
+  letter-spacing: -0.04em;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--corail); }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--blanc); }
+.btn-nav {
+  background: var(--corail);
+  color: var(--blanc) !important;
+  padding: 8px 20px;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  font-size: 14px !important;
+  transition: opacity 0.2s !important;
+}
+.btn-nav:hover { opacity: 0.88; }
+
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav-burger span {
+  display: block;
+  width: 22px; height: 2px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+/* ─── Hero ───────────────────────────────────────────── */
+.hero {
+  background: var(--nuit);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 2.5rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* BG geometric shapes */
+.hero-shapes { position: absolute; inset: 0; pointer-events: none; }
+.shape {
+  position: absolute;
+  border-radius: 60px;
+}
+.shape-1 {
+  width: 600px; height: 600px;
+  background: var(--bleu);
+  top: -180px; right: -150px;
+  transform: rotate(18deg);
+  opacity: 0.3;
+  --r: 18deg;
+  animation: float 9s ease-in-out infinite;
+}
+.shape-2 {
+  width: 320px; height: 320px;
+  background: var(--corail);
+  bottom: -60px; right: 120px;
+  transform: rotate(-14deg);
+  opacity: 0.07;
+  --r: -14deg;
+  animation: float 12s 2s ease-in-out infinite;
+}
+.shape-3 {
+  width: 500px; height: 500px;
+  background: #0c1a60;
+  bottom: -220px; left: -150px;
+  transform: rotate(25deg);
+  opacity: 0.35;
+  --r: 25deg;
+  animation: float 11s 1s ease-in-out infinite;
+}
+.shape-4 {
+  width: 180px; height: 180px;
+  background: var(--corail);
+  top: 30%; left: 55%;
+  border-radius: 50%;
+  opacity: 0.04;
+  animation: float 8s 3s ease-in-out infinite;
+}
+
+/* Dot grid overlay */
+.hero-dots {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--corail);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+.eyebrow-line {
+  width: 32px; height: 1.5px;
+  background: var(--corail);
+  display: inline-block;
+}
+
+.hero h1 {
+  font-family: var(--font-titre);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 800;
+  color: var(--blanc);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.5rem;
+  max-width: 820px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--corail);
+  position: relative;
+}
+
+.hero-sub {
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: rgba(255,255,255,0.45);
+  line-height: 1.8;
+  max-width: 520px;
+  margin-bottom: 2.5rem;
+}
+
+.cta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--corail);
+  color: var(--blanc);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: transform 0.2s, opacity 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-2px); opacity: 0.92; }
+.btn-outline {
+  color: rgba(255,255,255,0.6);
+  font-size: 15px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s;
+}
+.btn-outline:hover { color: var(--blanc); }
+.btn-outline .arrow-circle {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  transition: border-color 0.2s;
+}
+.btn-outline:hover .arrow-circle { border-color: rgba(255,255,255,0.6); }
+
+/* Scroll indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255,255,255,0.25);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  z-index: 2;
+  animation: fadeIn 1s 1s ease both;
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+}
+
+/* ─── Stats ───────────────────────────────────────────── */
+.stats {
+  background: #0c0c1e;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 2rem 2.5rem;
+}
+.stats-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.stat {
+  padding: 0.5rem 2.5rem;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  position: relative;
+}
+.stat:first-child { padding-left: 0; }
+.stat:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--font-titre);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--blanc);
+  letter-spacing: -0.04em;
+  margin-bottom: 3px;
+  line-height: 1;
+}
+.stat-num span { color: var(--corail); }
+.stat-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  line-height: 1.4;
+}
+
+/* ─── Section base ────────────────────────────────────── */
+.section {
+  padding: 6rem 2.5rem;
+}
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--corail);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.section-tag::before {
+  content: '';
+  display: block;
+  width: 20px; height: 1.5px;
+  background: var(--corail);
+}
+.section-title {
+  font-family: var(--font-titre);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 800;
+  color: var(--texte);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.section-title.light { color: var(--blanc); }
+.section-sub {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 540px;
+}
+.section-sub.light { color: rgba(255,255,255,0.45); }
+
+/* ─── Pour vous section ──────────────────────────────── */
+.pour-vous {
+  background: var(--creme);
+}
+.pour-vous-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 3.5rem;
+}
+.service-card {
+  background: var(--blanc);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  border: 1px solid var(--border);
+  transition: transform 0.25s, box-shadow 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--corail);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+.service-card:hover::before { transform: scaleX(1); }
+.card-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  margin-bottom: 1.25rem;
+}
+.card-title {
+  font-family: var(--font-titre);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--texte);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+.card-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+.card-tag {
+  display: inline-block;
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+}
+
+/* ─── Comment ça marche ──────────────────────────────── */
+.comment {
+  background: var(--nuit);
+  position: relative;
+  overflow: hidden;
+}
+.comment::before {
+  content: '';
+  position: absolute;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(232,115,90,0.08) 0%, transparent 70%);
+  top: -200px; right: -200px;
+  pointer-events: none;
+}
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 3.5rem;
+  position: relative;
+}
+.steps-grid::before {
+  content: '';
+  position: absolute;
+  top: 28px; left: 10%;
+  width: 80%; height: 1px;
+  background: rgba(255,255,255,0.08);
+  z-index: 0;
+}
+.step-item {
+  text-align: center;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+.step-bubble {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(232,115,90,0.12);
+  border: 1px solid rgba(232,115,90,0.3);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.25rem;
+  font-family: var(--font-titre);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--corail);
+  position: relative;
+}
+.step-bubble::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(232,115,90,0.15);
+  animation: pulse-ring 2.5s ease-out infinite;
+}
+.step-item:nth-child(2) .step-bubble::after { animation-delay: 0.5s; }
+.step-item:nth-child(3) .step-bubble::after { animation-delay: 1s; }
+.step-item:nth-child(4) .step-bubble::after { animation-delay: 1.5s; }
+.step-title {
+  font-family: var(--font-titre);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--blanc);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+.step-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.38);
+  line-height: 1.65;
+}
+
+/* ─── Deux audiences ─────────────────────────────────── */
+.audiences {
+  background: var(--blanc);
+}
+.audience-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 3.5rem;
+}
+.audience-card {
+  border-radius: 20px;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+  transition: transform 0.25s;
+}
+.audience-card:hover { transform: translateY(-3px); }
+.audience-card.dark {
+  background: var(--nuit);
+}
+.audience-card.light {
+  background: var(--creme);
+  border: 1px solid var(--border);
+}
+.audience-label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.audience-card.dark .audience-label { color: var(--corail); }
+.audience-card.light .audience-label { color: var(--corail); }
+.audience-title {
+  font-family: var(--font-titre);
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.audience-card.dark .audience-title { color: var(--blanc); }
+.audience-card.light .audience-title { color: var(--texte); }
+.audience-desc {
+  font-size: 14px;
+  line-height: 1.75;
+  margin-bottom: 1.75rem;
+}
+.audience-card.dark .audience-desc { color: rgba(255,255,255,0.42); }
+.audience-card.light .audience-desc { color: var(--muted); }
+.audience-points {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+.audience-points li {
+  font-size: 14px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.audience-card.light .audience-points li {
+  border-bottom-color: var(--border);
+}
+.audience-card.dark .audience-points li { color: rgba(255,255,255,0.7); }
+.audience-card.light .audience-points li { color: var(--texte); }
+.check {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: rgba(232,115,90,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  color: var(--corail);
+  flex-shrink: 0;
+}
+.btn-audience {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 11px 22px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.btn-audience:hover { transform: translateY(-1px); opacity: 0.88; }
+.btn-audience.filled {
+  background: var(--corail);
+  color: var(--blanc);
+}
+.btn-audience.outlined {
+  border: 1.5px solid rgba(26,26,46,0.2);
+  color: var(--texte);
+}
+
+/* Deco shape on audience card */
+.audience-deco {
+  position: absolute;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  bottom: -80px; right: -80px;
+  opacity: 0.05;
+}
+.audience-card.dark .audience-deco { background: var(--corail); }
+.audience-card.light .audience-deco { background: var(--bleu); opacity: 0.08; }
+
+/* ─── Éducation / ressources ─────────────────────────── */
+.ressources {
+  background: var(--creme);
+}
+.ressources-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.ressources-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.ressource-card {
+  background: var(--blanc);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.ressource-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.07); }
+.ressource-thumb {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.ressource-thumb .thumb-label {
+  position: absolute;
+  bottom: 10px; left: 12px;
+  font-size: 10px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+  background: rgba(255,255,255,0.9);
+  color: var(--texte);
+}
+.ressource-body { padding: 1.25rem 1.4rem 1.5rem; }
+.ressource-title {
+  font-family: var(--font-titre);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--texte);
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+}
+.ressource-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+.ressource-link {
+  font-size: 13px;
+  color: var(--corail);
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ─── Témoignage / trust ─────────────────────────────── */
+.trust {
+  background: var(--nuit);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.trust::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(232,115,90,0.06), transparent);
+  pointer-events: none;
+}
+.trust-quote {
+  font-family: var(--font-titre);
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 800;
+  color: var(--blanc);
+  letter-spacing: -0.03em;
+  line-height: 1.3;
+  max-width: 720px;
+  margin: 0 auto 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+.trust-quote em {
+  font-style: normal;
+  color: var(--corail);
+}
+.trust-author {
+  font-size: 14px;
+  color: rgba(255,255,255,0.35);
+  position: relative;
+  z-index: 1;
+  margin-bottom: 3.5rem;
+}
+.trust-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.trust-logo-item {
+  font-family: var(--font-titre);
+  font-size: 16px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.18);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+/* ─── CTA final ──────────────────────────────────────── */
+.cta-final {
+  background: var(--corail);
+  padding: 5rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-final::before {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50%;
+  top: -200px; right: -100px;
+}
+.cta-final::after {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  background: rgba(0,0,0,0.04);
+  border-radius: 50%;
+  bottom: -100px; left: -50px;
+}
+.cta-final-inner { position: relative; z-index: 1; }
+.cta-final h2 {
+  font-family: var(--font-titre);
+  font-size: clamp(28px, 4vw, 50px);
+  font-weight: 800;
+  color: var(--blanc);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.cta-final p {
+  font-size: 17px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 2.5rem;
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta-final-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.btn-white {
+  background: var(--blanc);
+  color: var(--corail);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.btn-white:hover { transform: translateY(-2px); opacity: 0.92; }
+.btn-white-outline {
+  color: rgba(255,255,255,0.8);
+  font-size: 15px;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  padding: 13px 26px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-white-outline:hover { background: rgba(255,255,255,0.1); color: var(--blanc); }
+
+/* ─── Footer ─────────────────────────────────────────── */
+footer {
+  background: #050510;
+  padding: 3rem 2.5rem 2rem;
+  color: rgba(255,255,255,0.3);
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 2rem;
+}
+.footer-brand-name {
+  font-family: var(--font-titre);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--blanc);
+  letter-spacing: -0.04em;
+  margin-bottom: 0.75rem;
+}
+.footer-brand-name span { color: var(--corail); }
+.footer-brand-desc {
+  font-size: 13px;
+  line-height: 1.75;
+  max-width: 220px;
+}
+.footer-col-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footer-links a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.28);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: rgba(255,255,255,0.7); }
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-legal { font-size: 12px; }
+.footer-hf {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.footer-hf a {
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+}
+.footer-hf a:hover { color: var(--corail); }
+
+/* ─── Responsive ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .steps-grid::before { display: none; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 700px) {
+  .nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 68px 0 0;
+    background: rgba(8,8,26,0.97);
+    backdrop-filter: blur(16px);
+    padding: 2rem 1.5rem;
+    gap: 1rem;
+    align-items: flex-start;
+    z-index: 99;
+  }
+  .nav-links.open a { font-size: 18px; color: rgba(255,255,255,0.75); }
+  .nav-links.open .btn-nav { font-size: 16px !important; }
+  .nav-burger { display: flex; }
+  .hero { padding: 100px 1.5rem 4rem; }
+  .section { padding: 4rem 1.5rem; }
+  .stats { padding: 1.5rem; }
+  .stats-inner { grid-template-columns: repeat(3, 1fr); gap: 0; }
+  .stat { padding: 0.5rem 1rem; }
+  .stat-num { font-size: 22px; }
+  .pour-vous-grid { grid-template-columns: 1fr; }
+  .audience-grid { grid-template-columns: 1fr; }
+  .ressources-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; gap: 1.5rem; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+  .trust-logos { gap: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─────────────────────────────────────────── -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">BN<span>EF</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#comment">Comment ça marche</a></li>
+    <li><a href="#ressources">Ressources</a></li>
+    <li><a href="#contact" class="btn-nav">Commencer</a></li>
+  </ul>
+  <div class="nav-burger" id="burger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+  </div>
+  <div class="hero-dots"></div>
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow anim-1">
+      <span class="eyebrow-line"></span>
+      Avantages sociaux &amp; régimes de retraite
+    </div>
+    <h1 class="anim-2">Les avantages<br>sociaux,<br><em>enfin clairs.</em></h1>
+    <p class="hero-sub anim-3">On transforme vos programmes d'avantages sociaux en quelque chose que vos employés comprennent vraiment — et dont ils sont fiers.</p>
+    <div class="cta-row anim-4">
+      <a href="#services" class="btn-primary">Je suis employeur &rarr;</a>
+      <a href="#services" class="btn-outline">
+        <span class="arrow-circle">→</span>
+        Je suis employé
+      </a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Défiler
+  </div>
+</section>
+
+<!-- ─── STATS ─────────────────────────────────────────── -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-num">+<span>2</span>400</div>
+      <div class="stat-label">Employés accompagnés</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num"><span>98</span>%</div>
+      <div class="stat-label">Taux de satisfaction client</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num"><span>3×</span></div>
+      <div class="stat-label">Plus d'utilisation des avantages</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SERVICES ─────────────────────────────────────── -->
+<section class="section pour-vous" id="services">
+  <div class="section-inner">
+    <div class="section-tag">Ce qu'on fait</div>
+    <h2 class="section-title">Des solutions claires,<br>pour tout le monde.</h2>
+    <p class="section-sub">Que vous soyez employeur ou employé, BNEF vous accompagne avec des solutions simples et un langage humain.</p>
+
+    <div class="pour-vous-grid" style="margin-top: 3rem;">
+      <div class="service-card">
+        <div class="card-icon" style="background:#FDEEE9;">🛡️</div>
+        <div class="card-title">Assurance collective</div>
+        <div class="card-desc">Des programmes de protection adaptés à la réalité de votre équipe. Santé, vie, invalidité — choisis pour leur valeur réelle, pas leur complexité.</div>
+        <span class="card-tag" style="background:#FDEEE9; color:#A8412A;">Employeur</span>
+      </div>
+      <div class="service-card">
+        <div class="card-icon" style="background:#EEF2FF;">📈</div>
+        <div class="card-title">Régime de retraite</div>
+        <div class="card-desc">REER collectif, CELI, DPSP — on choisit le bon véhicule pour votre organisation et on explique clairement à vos employés comment en tirer profit.</div>
+        <span class="card-tag" style="background:#EEF2FF; color:#3730A3;">Employeur</span>
+      </div>
+      <div class="service-card">
+        <div class="card-icon" style="background:#F0FDF4;">🎓</div>
+        <div class="card-title">Éducation financière</div>
+        <div class="card-desc">Sessions, guides et outils pour que vos employés comprennent vraiment leurs avantages — et les utilisent. Parce qu'un avantage incompris est un avantage perdu.</div>
+        <span class="card-tag" style="background:#F0FDF4; color:#166534;">Employé</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COMMENT ÇA MARCHE ─────────────────────────────── -->
+<section class="section comment" id="comment">
+  <div class="section-inner">
+    <div class="section-tag">Le processus</div>
+    <h2 class="section-title light">Simple de A à Z.</h2>
+    <p class="section-sub light">Quatre étapes pour transformer vos avantages sociaux en vrai levier de rétention.</p>
+
+    <div class="steps-grid">
+      <div class="step-item">
+        <div class="step-bubble">1</div>
+        <div class="step-title">Analyse</div>
+        <div class="step-desc">On fait le portrait complet de vos besoins, votre budget et votre équipe.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-bubble">2</div>
+        <div class="step-title">Conception</div>
+        <div class="step-desc">On bâtit un programme sur mesure avec les meilleures couvertures du marché.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-bubble">3</div>
+        <div class="step-title">Communication</div>
+        <div class="step-desc">On présente le programme à vos employés dans un langage qu'ils comprennent.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-bubble">4</div>
+        <div class="step-title">Suivi continu</div>
+        <div class="step-desc">On reste là. Révisions annuelles, questions, changements — on gère tout.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DEUX AUDIENCES ────────────────────────────────── -->
+<section class="section audiences">
+  <div class="section-inner">
+    <div class="section-tag">Deux portes d'entrée</div>
+    <h2 class="section-title">Pour vous, où que vous soyez.</h2>
+
+    <div class="audience-grid">
+      <a href="#" class="audience-card dark">
+        <div class="audience-deco"></div>
+        <div class="audience-label">Vous êtes employeur</div>
+        <div class="audience-title">Offrez plus.<br>Gérez moins.</div>
+        <div class="audience-desc">On prend en charge la complexité de vos avantages sociaux pour que vous puissiez vous concentrer sur votre business.</div>
+        <ul class="audience-points">
+          <li><span class="check">✓</span> Programme sur mesure</li>
+          <li><span class="check">✓</span> Gestion administrative simplifiée</li>
+          <li><span class="check">✓</span> Communication aux employés incluse</li>
+          <li><span class="check">✓</span> Révision annuelle proactive</li>
+        </ul>
+        <span class="btn-audience filled">En savoir plus &rarr;</span>
+      </a>
+      <a href="#" class="audience-card light">
+        <div class="audience-deco"></div>
+        <div class="audience-label">Vous êtes employé</div>
+        <div class="audience-title">Vos avantages.<br>Vraiment pour vous.</div>
+        <div class="audience-desc">Comprendre vos avantages sociaux ne devrait pas être un travail à temps plein. On est là pour vous expliquer simplement.</div>
+        <ul class="audience-points">
+          <li><span class="check">✓</span> Guides clairs et sans jargon</li>
+          <li><span class="check">✓</span> Réponses à vos questions</li>
+          <li><span class="check">✓</span> Outils pour maximiser vos avantages</li>
+          <li><span class="check">✓</span> Accompagnement personnalisé</li>
+        </ul>
+        <span class="btn-audience outlined">En savoir plus &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESSOURCES ────────────────────────────────────── -->
+<section class="section ressources" id="ressources">
+  <div class="section-inner">
+    <div class="ressources-header">
+      <div>
+        <div class="section-tag">Éducation</div>
+        <h2 class="section-title">Comprendre,<br>c'est tout.</h2>
+      </div>
+      <a href="#" style="font-size:14px; color:var(--corail); text-decoration:none; font-weight:500; white-space:nowrap;">Voir toutes les ressources →</a>
+    </div>
+
+    <div class="ressources-grid">
+      <div class="ressource-card">
+        <div class="ressource-thumb" style="background:#FDEEE9;">
+          📋
+          <span class="thumb-label">Guide</span>
+        </div>
+        <div class="ressource-body">
+          <div class="ressource-title">C'est quoi l'assurance collective, exactement?</div>
+          <div class="ressource-desc">On démystifie les termes, les couvertures et ce que ça change dans votre vie.</div>
+          <a href="#" class="ressource-link">Lire le guide →</a>
+        </div>
+      </div>
+      <div class="ressource-card">
+        <div class="ressource-thumb" style="background:#EEF2FF;">
+          💰
+          <span class="thumb-label">Calculateur</span>
+        </div>
+        <div class="ressource-body">
+          <div class="ressource-title">Combien vaut votre programme d'avantages sociaux?</div>
+          <div class="ressource-desc">Calculez la valeur réelle de vos avantages en dollars — et voyez ce que vous laissez sur la table.</div>
+          <a href="#" class="ressource-link">Utiliser l'outil →</a>
+        </div>
+      </div>
+      <div class="ressource-card">
+        <div class="ressource-thumb" style="background:#F0FDF4;">
+          🎯
+          <span class="thumb-label">Checklist</span>
+        </div>
+        <div class="ressource-body">
+          <div class="ressource-title">Les 5 questions à poser avant de choisir un régime de retraite</div>
+          <div class="ressource-desc">Une liste courte et pratique pour prendre la bonne décision sans se perdre.</div>
+          <a href="#" class="ressource-link">Télécharger →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRUST ─────────────────────────────────────────── -->
+<section class="section trust">
+  <div class="section-inner" style="text-align:center;">
+    <div class="trust-quote">
+      "Pour la première fois, mes employés comprennent <em>vraiment</em> ce qu'ils ont. Ça a changé ma façon de parler de rétention."
+    </div>
+    <div class="trust-author">— Marie-Ève Tremblay, DRH · Groupe Laurentide, 85 employés</div>
+
+    <div class="trust-logos">
+      <div class="trust-logo-item">Groupe Laurentide</div>
+      <div class="trust-logo-item">Contech QC</div>
+      <div class="trust-logo-item">Novaxis</div>
+      <div class="trust-logo-item">Atelier Nord</div>
+      <div class="trust-logo-item">Visilab</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA FINAL ─────────────────────────────────────── -->
+<section class="cta-final" id="contact">
+  <div class="cta-final-inner">
+    <h2>Prêt à rendre vos avantages<br>enfin compris?</h2>
+    <p>Une conversation de 30 minutes suffit pour voir si BNEF est le bon fit pour votre organisation.</p>
+    <div class="cta-final-btns">
+      <a href="mailto:info@bnef.ca" class="btn-white">Prendre rendez-vous</a>
+      <a href="tel:18888802346" class="btn-white-outline">1 888 880-2346</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">BN<span>EF</span></div>
+        <p class="footer-brand-desc">Les avantages sociaux, enfin clairs. Une marque de Hunter Finance, cabinet de services financiers indépendant.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#">Assurance collective</a></li>
+          <li><a href="#">Régime de retraite</a></li>
+          <li><a href="#">Éducation financière</a></li>
+          <li><a href="#">Pour les employeurs</a></li>
+          <li><a href="#">Pour les employés</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Ressources</div>
+        <ul class="footer-links">
+          <li><a href="#">Guides</a></li>
+          <li><a href="#">Calculateurs</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Blogue</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="mailto:info@bnef.ca">info@bnef.ca</a></li>
+          <li><a href="tel:18888802346">1 888 880-2346</a></li>
+          <li><a href="#">3291 ch Ste-Foy, Québec</a></li>
+          <li><a href="https://hunterfinance.ca">Hunter Finance →</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-legal">© 2025 BNEF · Politique de confidentialité</span>
+      <span class="footer-hf">Une marque de <a href="https://hunterfinance.ca">Hunter Finance Inc.</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── JS ────────────────────────────────────────────── -->
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    const links = document.getElementById('navLinks');
+    links.classList.toggle('open');
+  }
+
+  // Close menu on link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .step-item, .audience-card, .ressource-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
